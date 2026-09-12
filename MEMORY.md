@@ -6,7 +6,7 @@ Atualizada em 12 de setembro de 2026.
 
 O projeto foi criado do zero como um painel web responsivo de estatísticas de futebol para análise de apostas. A primeira versão está implementada, compilada e publicada de forma privada no Sites.
 
-Deployment confirmado na criação: `https://bets-stats-futebol.chatgpt.team`.
+Deployment privado confirmado: `https://bets-stats-futebol.ruyfichman.chatgpt.site`.
 
 O aplicativo abre em modo demonstração porque nenhuma chave da API-Football foi configurada no ambiente publicado. Os valores exibidos nesse modo são determinísticos e simulados; a interface os identifica explicitamente.
 
@@ -71,4 +71,3 @@ Importante: a integração ao vivo foi implementada e verificada por tipagem/bui
 2. Validar uma liga europeia e o Brasileirão com dados reais, conferindo nomes exatos das métricas e cobertura.
 3. Avaliar persistência/cache externo apenas se o volume de uso ou a cota do provedor justificar.
 4. Expandir para confrontos, árbitros, escalações, odds ou alertas somente mediante pedido do usuário.
-

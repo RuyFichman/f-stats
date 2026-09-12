@@ -71,8 +71,7 @@ Não commite `node_modules`, `.pnpm-store`, saídas de build, arquivos `.env` re
 ## Publicação
 
 - O site existente é privado e pertence ao usuário atual.
-- URL atual: `https://bets-stats-futebol.chatgpt.team` (confirme no Sites antes de divulgar, pois o endereço retornado pelo deployment pode variar por workspace).
+- URL atual confirmada: `https://bets-stats-futebol.ruyfichman.chatgpt.site` (confirme novamente no Sites antes de divulgar em trabalhos futuros).
 - Preserve o público atual. Não torne o site público, não convide pessoas e não altere permissões sem pedido explícito.
 - Para qualquer publicação, siga as skills `sites-building` e `sites-hosting`, faça push da revisão exata, salve uma versão e confirme o estado terminal do deployment.
 - Mudanças apenas em documentação interna não exigem uma nova publicação do Worker, salvo se o fluxo de Sites vigente exigir sincronizar a revisão de origem.
-
