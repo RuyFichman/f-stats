@@ -243,10 +243,10 @@ export function FootballDashboard() {
             <Dialog>
               <DialogTrigger asChild><Button variant="ghost" className="size-9 p-0 text-[#93aa9f] hover:bg-white/6 hover:text-white" aria-label="Configurar fonte de dados"><Settings2 className="size-4" /></Button></DialogTrigger>
               <DialogContent className="border-white/10 bg-[#0d1b17] text-white">
-                <DialogHeader><DialogTitle className="font-display text-xl">Fonte de dados</DialogTitle><DialogDescription className="text-[#93aa9f]">O painel protege a chave no servidor; ela nunca é enviada ao navegador.</DialogDescription></DialogHeader>
+                <DialogHeader><DialogTitle className="font-display text-xl">Fonte de dados</DialogTitle><DialogDescription className="text-[#93aa9f]">A coleta ocorre somente no servidor e as respostas ficam em cache por 15 minutos.</DialogDescription></DialogHeader>
                 <div className="rounded-lg border border-white/8 bg-[#07110f] p-4">
-                  <p className="mb-2 flex items-center gap-2 font-semibold"><Database className="size-4 text-[#c7ff3d]" /> API-Football</p>
-                  <p className="text-sm leading-6 text-[#93aa9f]">Defina <code className="rounded bg-white/8 px-1.5 py-0.5 text-[#c7ff3d]">API_FOOTBALL_KEY</code> no ambiente do servidor. Sem a variável, o app usa a amostra simulada.</p>
+                  <p className="mb-2 flex items-center gap-2 font-semibold"><Database className="size-4 text-[#c7ff3d]" /> ESPN · experimento pessoal</p>
+                  <p className="text-sm leading-6 text-[#93aa9f]">O painel consulta o feed JSON usado pelo site da ESPN. Não é uma API pública documentada e pode mudar ou ficar indisponível sem aviso.</p>
                 </div>
                 <div className="flex gap-2 rounded-lg border border-[#ffbd59]/15 bg-[#ffbd59]/6 p-3 text-sm text-[#d8c18c]"><Info className="mt-0.5 size-4 shrink-0" /><p>A disponibilidade de estatísticas varia por campeonato e partida. O painel calcula a cobertura e preserva dados ausentes como traço.</p></div>
               </DialogContent>

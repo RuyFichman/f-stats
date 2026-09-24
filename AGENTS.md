@@ -22,13 +22,13 @@ O produto informa; não promete lucro e não recomenda apostas. Preserve sempre 
 
 ## Fonte de dados
 
-- A integração ao vivo usa API-Football v3 por HTTPS.
-- A única variável sensível esperada é `API_FOOTBALL_KEY`.
-- Nunca coloque a chave em componente cliente, URL, log, commit ou resposta HTTP.
-- Sem a variável, a rota deve continuar retornando o modo demonstração claramente identificado como simulado.
-- Preserve o cache server-side de 15 minutos ou justifique qualquer mudança para evitar desperdício de cota.
+- A integração ao vivo consulta por HTTPS o feed JSON usado pelo site da ESPN.
+- Esse feed não é uma API pública documentada. Trate a integração como experimento pessoal, sem garantia de estabilidade ou autorização para redistribuição.
+- Nenhuma chave ou variável sensível é necessária atualmente. A coleta deve continuar exclusivamente no servidor.
+- O aplicativo inicia com uma amostra simulada claramente identificada enquanto consulta a fonte experimental. Se a ESPN falhar, `/api/stats` deve responder com erro e o cliente deve manter o último conjunto válido, sem apresentar dados simulados como reais.
+- Preserve o cache server-side de 15 minutos ou justifique qualquer mudança para reduzir tráfego e risco de bloqueio do feed.
 - Estatísticas do provedor podem ser `null`. Não converta ausência em zero; mostre traço e mantenha o indicador de cobertura.
-- IDs atuais das ligas: Premier League 39, Bundesliga 78, Serie A 135, La Liga 140, Ligue 1 61 e Brasileirão 71.
+- Identificadores da ESPN: Premier League `eng.1`, Bundesliga `ger.1`, Serie A `ita.1`, La Liga `esp.1`, Ligue 1 `fra.1` e Brasileirão `bra.1`.
 - Ao mudar a agregação, mantenha o recorte independente por clube, por mando e pelos últimos 5, 10 ou 20 jogos.
 
 ## Regras de interface

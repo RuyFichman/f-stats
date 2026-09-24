@@ -1,6 +1,6 @@
 # Memória do projeto — Bets Stats
 
-Atualizada em 12 de setembro de 2026.
+Atualizada em 18 de setembro de 2026.
 
 ## Resumo atual
 
@@ -8,7 +8,7 @@ O projeto foi criado do zero como um painel web responsivo de estatísticas de f
 
 Deployment privado confirmado: `https://bets-stats-futebol.ruyfichman.chatgpt.site`.
 
-O aplicativo abre em modo demonstração porque nenhuma chave da API-Football foi configurada no ambiente publicado. Os valores exibidos nesse modo são determinísticos e simulados; a interface os identifica explicitamente.
+O aplicativo inicia com uma amostra simulada e consulta, no servidor, o feed JSON usado pelo site da ESPN. A integração é um experimento pessoal: o feed não é uma API pública documentada e não há garantia de estabilidade ou autorização para redistribuição.
 
 ## Funcionalidades entregues
 
@@ -32,19 +32,19 @@ A rota `GET /api/stats` recebe:
 - `window`: 5, 10 ou 20;
 - `venue`: `all`, `home` ou `away`.
 
-Com `API_FOOTBALL_KEY`, a rota consulta partidas finalizadas na API-Football, seleciona o último recorte por clube, busca detalhes em grupos de até 20 partidas e agrega as métricas. As respostas ficam em cache em memória por 15 minutos.
+A rota consulta os placares anuais da ESPN pelos identificadores `eng.1`, `ger.1`, `ita.1`, `esp.1`, `fra.1` e `bra.1`. Para ligas europeias, ela combina o ano inicial da temporada com o ano seguinte e filtra pelo `season.year` da ESPN; para o Brasileirão, usa apenas o ano civil.
 
-Sem a chave, a rota retorna a amostra simulada. Se o provedor falhar quando uma chave estiver configurada, o cliente mantém o último conjunto válido e mostra o erro; ele não mascara silenciosamente a falha como dado real.
+O placar anual já inclui resultados, chutes, chutes no alvo, escanteios, faltas e eventos de cartões. A rota seleciona os últimos 5, 10 ou 20 jogos independentemente por clube e mando, agrega as métricas e preserva ausências como `null`. Tanto o placar bruto quanto a resposta normalizada ficam em cache em memória por 15 minutos.
 
-Importante: a integração ao vivo foi implementada e verificada por tipagem/build, mas ainda não foi validada ponta a ponta com uma chave real. Esse é o principal passo pendente.
+Nenhuma chave é necessária. Se a ESPN falhar, `/api/stats` responde 502 e o cliente mantém o último conjunto válido; a falha não é mascarada como dado real.
 
 ## Decisões técnicas
 
 - Next.js/React com Vinext foi escolhido para manter interface e proxy seguro no mesmo projeto Cloudflare Worker.
-- A chave fica exclusivamente no servidor.
+- A coleta da ESPN ocorre exclusivamente no servidor.
 - Campos sem cobertura permanecem nulos e aparecem como `—`.
 - O modo demonstração evita uma tela vazia e permite avaliar todo o produto sem contratar um provedor imediatamente.
-- O cache reduz chamadas e protege a cota do plano da API.
+- O cache reduz chamadas ao feed experimental e o risco de bloqueio por excesso de tráfego.
 - A UI usa tema esportivo escuro com destaque verde-limão, sem imagens decorativas.
 - O site permanece privado; nenhuma configuração de acesso deve mudar sem autorização explícita.
 
@@ -53,7 +53,8 @@ Importante: a integração ao vivo foi implementada e verificada por tipagem/bui
 - Build de produção concluído com sucesso.
 - TypeScript estrito concluído sem erros.
 - Página principal respondeu HTTP 200 localmente.
-- Endpoint demonstrativo respondeu HTTP 200 e respeitou liga, janela e mando.
+- Endpoint com dados da ESPN respondeu HTTP 200 para as seis ligas de 2026, com 100% de cobertura das estatísticas detalhadas no recorte testado.
+- Consultas da Premier League 2025 com janela 20 e da Premier League/Brasileirão 2026 por mando respeitaram temporada, janela e casa/fora.
 - Archive do Worker continha `dist/server/index.js` e `dist/.openai/hosting.json`.
 - Primeira publicação privada terminou com estado `succeeded`.
 
@@ -67,7 +68,7 @@ Importante: a integração ao vivo foi implementada e verificada por tipagem/bui
 
 ## Próximos passos prováveis
 
-1. Configurar `API_FOOTBALL_KEY` como segredo do ambiente publicado.
-2. Validar uma liga europeia e o Brasileirão com dados reais, conferindo nomes exatos das métricas e cobertura.
-3. Avaliar persistência/cache externo apenas se o volume de uso ou a cota do provedor justificar.
+1. Validar periodicamente se o host e o formato do feed da ESPN continuam funcionais.
+2. Antes de qualquer uso público ou comercial, substituir a fonte experimental por um feed licenciado ou obter autorização de redistribuição.
+3. Avaliar persistência/cache externo apenas se o volume de uso justificar.
 4. Expandir para confrontos, árbitros, escalações, odds ou alertas somente mediante pedido do usuário.
