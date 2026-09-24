@@ -130,7 +130,7 @@ export function generateDemoStats(
     venue,
     coverage: 100,
     teams,
-    notice: "Os números deste modo são simulados para demonstrar o painel. Configure a API para usar partidas reais.",
+    notice: "Os números deste modo são simulados para demonstrar o painel. Aguarde a consulta da fonte experimental para usar partidas reais.",
   };
 }
 

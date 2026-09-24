@@ -17,17 +17,13 @@ pnpm install
 pnpm dev
 ```
 
-Sem configuração adicional, o painel abre em modo demonstração com dados simulados.
+Ao abrir, o painel mostra uma amostra simulada enquanto consulta a fonte experimental no servidor.
 
-## Usar dados reais
+## Fonte experimental
 
-Crie `.env.local` a partir de `.env.example` e informe uma chave da API-Football:
+A rota `/api/stats` consulta o feed JSON usado pelo site da ESPN, sem chave, e normaliza partidas concluídas para o contrato do painel. O feed não é uma API pública documentada; esta integração destina-se a um experimento pessoal e pode mudar ou ficar indisponível sem aviso.
 
-```env
-API_FOOTBALL_KEY=sua_chave
-```
-
-A chave é usada apenas na rota do servidor. As respostas ao vivo ficam em cache por 15 minutos para reduzir o consumo da cota da API.
+As respostas normalizadas e os placares anuais ficam em cache no servidor por 15 minutos para reduzir o tráfego. Estatísticas ausentes permanecem nulas e aparecem como traço.
 
 ## Aviso
 
