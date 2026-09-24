@@ -1,12 +1,14 @@
 # Memória do projeto — Bets Stats
 
-Atualizada em 18 de setembro de 2026.
+Atualizada em 24 de setembro de 2026.
 
 ## Resumo atual
 
 O projeto foi criado do zero como um painel web responsivo de estatísticas de futebol para análise de apostas. A primeira versão está implementada, compilada e publicada de forma privada no Sites.
 
 Deployment privado confirmado: `https://bets-stats-futebol.ruyfichman.chatgpt.site`.
+
+A revisão `7da053b` foi salva como nova versão e publicada em 24 de setembro de 2026, preservando o acesso exclusivo do proprietário.
 
 O aplicativo inicia com uma amostra simulada e consulta, no servidor, o feed JSON usado pelo site da ESPN. A integração é um experimento pessoal: o feed não é uma API pública documentada e não há garantia de estabilidade ou autorização para redistribuição.
 
@@ -53,10 +55,11 @@ Nenhuma chave é necessária. Se a ESPN falhar, `/api/stats` responde 502 e o cl
 - Build de produção concluído com sucesso.
 - TypeScript estrito concluído sem erros.
 - Página principal respondeu HTTP 200 localmente.
-- Endpoint com dados da ESPN respondeu HTTP 200 para as seis ligas de 2026, com 100% de cobertura das estatísticas detalhadas no recorte testado.
+- Em ambiente local, o endpoint com dados da ESPN respondeu HTTP 200 para as seis ligas de 2026, com 100% de cobertura das estatísticas detalhadas no recorte testado.
 - Consultas da Premier League 2025 com janela 20 e da Premier League/Brasileirão 2026 por mando respeitaram temporada, janela e casa/fora.
 - Archive do Worker continha `dist/server/index.js` e `dist/.openai/hosting.json`.
-- Primeira publicação privada terminou com estado `succeeded`.
+- A publicação privada da revisão `7da053b` terminou com estado `succeeded`; a página inicial publicada respondeu HTTP 200.
+- No Worker publicado, `/api/stats` respondeu HTTP 502 porque o feed da ESPN não retornou partidas finalizadas para o recorte, embora a mesma consulta funcione localmente. O cliente mantém a amostra simulada e mostra o erro sem apresentá-la como dado real.
 
 ## Ambiente e operação
 
@@ -68,7 +71,7 @@ Nenhuma chave é necessária. Se a ESPN falhar, `/api/stats` responde 502 e o cl
 
 ## Próximos passos prováveis
 
-1. Validar periodicamente se o host e o formato do feed da ESPN continuam funcionais.
+1. Investigar por que o feed da ESPN retorna uma lista vazia quando consultado pelo Worker publicado, embora funcione localmente.
 2. Antes de qualquer uso público ou comercial, substituir a fonte experimental por um feed licenciado ou obter autorização de redistribuição.
 3. Avaliar persistência/cache externo apenas se o volume de uso justificar.
 4. Expandir para confrontos, árbitros, escalações, odds ou alertas somente mediante pedido do usuário.
